@@ -35,10 +35,6 @@ header {
 .search-btn {
     width: 100%;
     margin-top: 20px;
-    display: inline-flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
 }
 
 .btn {
@@ -90,4 +86,12 @@ header {
 
 h1 {
     color: white;
+}
+
+.forecast-thumbnail {
+    height: 50px;
+}
+
+.card-header {
+    padding: 0;
 }
