@@ -4,6 +4,8 @@ Third-party APIs allow developers to access their data and functionality by maki
 <br><br>
 Use the OpenWeather One Call API (Links to an external site.) to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use localStorage to store any persistent data.
 <br><br>
+Repo: https://github.com/xdatalinq/weather-dashboard/ <br><br>
+Live: https://xdatalinq.github.io/weather-dashboard/ <br><br>
 ![image](https://user-images.githubusercontent.com/89672040/160684538-4b58cc11-7054-4ac2-a389-30862dea0df3.png)
 <br><br>
 User Story
