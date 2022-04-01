@@ -1,13 +1,12 @@
 // Variables
 var searchFormEl = document.querySelector("#search-form");
-var apiContainer = document.getElementById('api-container');
+var apiContainerEl = document.querySelector("#main-weather");
 var cityInputEl = document.querySelector('#city');
-var apiContainerEl = document.querySelector(".api-container");
 var apiKey = "7c31afcd6af2016f309312b62ff32ba8";
 var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=toronto&appid=7c31afcd6af2016f309312b62ff32ba8';
 
 
-// Handlers
+// Submit form handler
 var formSubmitHandler = function(event) {
   event.preventDefault();
   console.log("form submit caught!");
@@ -32,7 +31,7 @@ var getWeather = function(city) {
         console.log(response);
         response.json().then(function(data) {
           console.log(data);
-          //displayWeather(data, city);
+          displayWeather(data);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -43,11 +42,34 @@ var getWeather = function(city) {
     });
 };
 
+var displayWeather = function(data) {
+  console.log("displayWeather called");
+  
+    var cityNameEl = document.createElement("h3");
+    cityNameEl.innerText = data.name;
+    apiContainerEl.appendChild(cityNameEl);
+    var currentDateEl = document.createElement("h3");
+    currentDateEl.innerText = moment().format("dddd, MMMM Do");
+    apiContainerEl.appendChild(currentDateEl);
+    var tempEl = document.createElement("h5");
+    tempEl.innerText = data.main.temp;
+    apiContainerEl.appendChild(tempEl);
+    var windEl = document.createElement("h5");
+    windEl.innerText = data.wind.speed;
+    apiContainerEl.appendChild(windEl);
+    var humidityEl = document.createElement("h5");
+    humidityEl.innerText = data.main.humidity;
+    apiContainerEl.appendChild(humidityEl);
+    // var uvIndexEl = document.createElement("h5");
+    // uvIndexEl.innerText = data[i].UVINDEX;
+    // apiContainer.appendChild(uvIndexEl);
+    
+};
+
 // Event listeners
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
 
-// Fetch
 // function getApi() {
 //   fetch(requestUrl)
 //     .then(function (response) {
