@@ -1,42 +1,45 @@
 /*
 API call
 https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-4 ways to make a call:
-XMLHttpRequest
-fetch
-Axios
-jQuery
 */
 
-// Idea for a get with XMLHttpRequest
-function UserAction() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-         if (this.readyState == 4 && this.status == 200) {
-             alert(this.responseText);
-         }
-    };
-    xhttp.open("POST", "Your Rest URL Here", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send("Your JSON Data Here");
-}
+var apiContainer = document.getElementById('api-container');
+var searchButton = document.getElementById('search-btn');
+var requestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat='+"lat"+'&lon='+"lon"+'&appid='+"apiKey"+';'"
+var lat = "";
+var lon = "";
+var part = "";
+var apiKey = "7c31afcd6af2016f309312b62ff32ba8";
 
-// This one uses fetch (have to link it)
-const userAction = async () => {
-    const response = await fetch('http://example.com/movies.json', {
-      method: 'POST',
-      body: myBody, // string or object
-      headers: {
-        'Content-Type': 'application/json'
+searchButton.addEventListener('click', getApi);
+
+function getApi() {
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // Use the console to examine the response
+      console.log(data);
+      // TODO: Loop through the data and generate your HTML
+      for(counter=0; i < data.length ; i++){
+        //console.log(i);
+        var cityNameEl = document.createElement("h1");
+        cityNameEl.innerText = data[i].CITY;
+        apiContainer.appendChild(cityNameEl);
+        var tempEl = document.createElement("h5");
+        tempEl.innertext = data[i].TEMPERATURE;
+        apiContainer.appendChild(tempEl);
+        var windEl = document.createElement("h5");
+        windEl.innertext = data[i].WIND;
+        apiContainer.appendChild(windEl);
+        var humidityEl = document.createElement("h5");
+        humidityEl.innertext = data[i].HUMIDITY;
+        apiContainer.appendChild(humidityEl);
+        var uvIndexEl = document.createElement("h5");
+        uvIndexEl.innertext = data[i].UVINDEX;
+        apiContainer.appendChild(uvIndexEl);
       }
     });
-    const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
-  }
+}
 
-// Simple GET
-const userAction = async () => {
-    const response = await fetch('http://example.com/movies.json');
-    const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
-  }

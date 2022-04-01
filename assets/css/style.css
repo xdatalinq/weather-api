@@ -95,3 +95,8 @@ h1 {
 .card-header {
     padding: 0;
 }
+
+.card {
+    background-color: rgba(44, 44, 165, 0.705);
+    border-radius: 0;
+}

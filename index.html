@@ -12,14 +12,14 @@
   <title>Weather Dashboard</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body class="flex-column">
   <header class="hero">
     <h1 class="app-title"><i class="fab"></i>Weather Dashboard</h1>
   </header>
 
 
   <main class="row">
-    <div class="col-12 col-md-3 borderframe">
+    <div class="col-12 col-md-3">
       
       <div class="col search-container">
         <h3 class="search-header">Search For a City:</h3>
@@ -32,82 +32,52 @@
 
       <div class="buttons-below-search flex-col">
         <div id="city-buttons" class="card-body flex-col">
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
-          <button type="submit" class="search-btn">Toronto</button>
           
         </div>
       </div>
     </div>
 
+    <div class="col-12 col-md-9">
+        
+      <div class="api-container borderframe">
+        <!-- API weather data here-->
+      </div>
+        
+      <div class="weather-container">
+        <h5 class="5-day">5-Day Forecast:</h5>
+      </div>
+        
+      <div class="row weather-card-container">
+        <div class="card">
+           <!-- Day-1 here-->
+        </div>
 
-    
-    <div class="col-12 col-md-9 borderframe">
-        
-        <div class="api-container borderframe">
-          <p>API container</p>
+        <div class="card">
+           <!-- Day-2 here-->
         </div>
-        <div class="weather-container borderframe">
-          <h5 class="card-header text-uppercase">5-Day Forecast:</h5>
+
+        <div class="card">
+           <!-- Day-3 here-->
         </div>
-        
-        <div class="row weather-card-container borderframe">
-          <div class="card borderframe">
-            <h5 class="card-header text-uppercase">DATE HERE</h>
-            <div class="forecast-thumbnail borderframe"></div>
-            <div id="weather-cards" class="card-body borderframe">
-              <P>TEMP:</P><br>
-              <P>WIND:</P><br>
-              <P>HUMIDITY:</P><br>
-            </div>
-          </div>
-          <div class="card borderframe">
-            <h5 class="card-header text-uppercase">DATE HERE</h>
-            <div class="forecast-thumbnail borderframe"></div>
-            <div id="weather-cards" class="card-body borderframe">
-              <P>TEMP:</P><br>
-              <P>WIND:</P><br>
-              <P>HUMIDITY:</P><br>
-            </div>
-          </div>
-          <div class="card borderframe">
-            <h5 class="card-header text-uppercase">DATE HERE</h>
-            <div class="forecast-thumbnail borderframe"></div>
-            <div id="weather-cards" class="card-body borderframe">
-              <P>TEMP:</P><br>
-              <P>WIND:</P><br>
-              <P>HUMIDITY:</P><br>
-            </div>
-          </div>
-          <div class="card borderframe">
-            <h5 class="card-header text-uppercase">DATE HERE</h>
-            <div class="forecast-thumbnail borderframe"></div>
-            <div id="weather-cards" class="card-body borderframe">
-              <P>TEMP:</P><br>
-              <P>WIND:</P><br>
-              <P>HUMIDITY:</P><br>
-            </div>
-          </div>
-          <div class="card borderframe">
-            <h5 class="card-header text-uppercase">DATE HERE</h>
-            <div class="forecast-thumbnail borderframe"></div>
-            <div id="weather-cards" class="card-body borderframe">
-              <P>TEMP:</P><br>
-              <P>WIND:</P><br>
-              <P>HUMIDITY:</P><br>
-            </div>
-          </div>
-          </div>
+
+        <div class="card">
+           <!-- Day-4 here-->
+        </div>
           
-        
+        <div class="card">
+          <!-- Day-5 here-->
+          <P>DATE:</P><br>
+          <P>THUMBNAIL:</P><br>
+          <P>TEMP:</P><br>
+          <P>WIND:</P><br>
+          <P>HUMIDITY:</P><br>
         </div>
-    </div>
+      </div>
+    
+    </div>      
+  
   </main>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
