@@ -13,6 +13,7 @@
 
 .api-container {
     height: 300px;
+    border-top: none;
 }
 
 .app-title {
