@@ -13,7 +13,19 @@ var formSubmitHandler = function(event) {
     getWeather(city);
     formSubmitHistory(city);
     apiContainerEl.textContent = "";
-    historyButtonsEl.textContent = "";
+    cityInputEl.value = "";
+  } else {
+    alert("Please enter a city name!");
+  }
+};
+
+// History button handler
+var historySubmitHandler = function(event) {
+  var city = event.target.name;
+  if (city) {
+    getWeather(city);
+    formSubmitHistory(city);
+    apiContainerEl.textContent = "";
     cityInputEl.value = "";
   } else {
     alert("Please enter a city name!");
@@ -23,12 +35,12 @@ var formSubmitHandler = function(event) {
 // Submit form history, push/shift to array
 var formSubmitHistory = function(city) {
   arrayLength = searchHistory.length
-  if (arrayLength >= 10) {
-    searchHistory.shift;
-    searchHistory.push(city);
+  if (arrayLength >= 3) {
+    searchHistory.pop();
+    searchHistory.unshift(city);
     displayHistoryButtons();
   } else {
-    searchHistory.push(city);
+    searchHistory.unshift(city);
     displayHistoryButtons();
   }
 };
@@ -104,31 +116,29 @@ var displayUVindex = function(uvi) {
 
 // Display history buttons
 var displayHistoryButtons = function () {
-  console.log("displayHistoryButtons Called!");
+  historyButtonsEl.textContent = "";
   for (let i = 0; i < searchHistory.length; i++) {
-    var buttonName = searchHistory[i];
-    var buttonEl = document.createElement("h3");
-    // buttonEl.classList = "search-btn";
-    // buttonEl.setAttribute("href", './index.html?city='+ CITY);
-    // buttonEl.setAttribute("target",);
-    // buttonEl.setAttribute("type", type);
-    buttonEl.innerText = buttonName;
+    var buttonEl = document.createElement("button");
+    buttonEl.classList = "search-btn";
+    buttonEl.setAttribute("name", searchHistory[i]);
+    buttonEl.setAttribute("type", "submit");
+    buttonEl.textContent = searchHistory[i];
     historyButtonsEl.appendChild(buttonEl);
-    console.log("just passed append!");
   }
 };
 
 // Event listeners
 searchFormEl.addEventListener("submit", formSubmitHandler);
+historyButtonsEl.addEventListener("click", historySubmitHandler);
 
 // Load history
 var loadHistory = function() {
-  console.log("Tasks loaded!");
+  console.log("History loaded!");
   localStorage.getItem("history");
 };
 
 // Save history
 var saveHistory = function() {
-  console.log("Tasks saved!");
+  console.log("History saved!");
   localStorage.setItem("history");
 };
