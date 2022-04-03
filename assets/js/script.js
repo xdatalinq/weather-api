@@ -64,6 +64,7 @@ var displayWeather = function(data) {
   var lon = data.coord.lon;
   var cityNameEl = document.createElement("h3");
   var currentDateEl = document.createElement("h3");
+  var iconEl = document.createElement("img");
   var tempEl = document.createElement("h5");
   var windEl = document.createElement("h5");
   var humidityEl = document.createElement("h5");
@@ -72,8 +73,10 @@ var displayWeather = function(data) {
   tempEl.innerText = data.main.temp;
   windEl.innerText = data.wind.speed;
   humidityEl.innerText = data.main.humidity;
+  iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.weather[0].icon +'.png');
   apiContainerEl.appendChild(cityNameEl);
   apiContainerEl.appendChild(currentDateEl);
+  apiContainerEl.appendChild(iconEl);
   apiContainerEl.appendChild(tempEl);
   apiContainerEl.appendChild(windEl);
   apiContainerEl.appendChild(humidityEl);
