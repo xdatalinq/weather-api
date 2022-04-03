@@ -2,19 +2,34 @@
 var searchFormEl = document.querySelector("#search-form");
 var apiContainerEl = document.querySelector("#main-weather");
 var cityInputEl = document.querySelector('#city');
-
+var historyButtonsEl = document.querySelector('#city-buttons');
+var searchHistory = [];
 
 // Submit form handler
 var formSubmitHandler = function(event) {
   event.preventDefault();
   var city = cityInputEl.value.trim();
   if (city) {
-    console.log(city);
     getWeather(city);
+    formSubmitHistory(city);
     apiContainerEl.textContent = "";
+    historyButtonsEl.textContent = "";
     cityInputEl.value = "";
   } else {
     alert("Please enter a city name!");
+  }
+};
+
+// Submit form history, push/shift to array
+var formSubmitHistory = function(city) {
+  arrayLength = searchHistory.length
+  if (arrayLength >= 10) {
+    searchHistory.shift;
+    searchHistory.push(city);
+    displayHistoryButtons();
+  } else {
+    searchHistory.push(city);
+    displayHistoryButtons();
   }
 };
 
@@ -26,8 +41,6 @@ var getWeather = function(city) {
       if (response.ok) {
         response.json().then(function(data) {
           displayWeather(data);
-          
-          console.log(data);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -45,7 +58,6 @@ var fetchUVindex = function(lat, lon) {
     .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          console.log(data);
           var uvIndex = data.value;
           displayUVindex(uvIndex);
         });
@@ -85,11 +97,38 @@ var displayWeather = function(data) {
 
 // Display UV index, api-container
 var displayUVindex = function(uvi) {
-  console.log('DisplayUVindex:' + uvi);
   var uvIndexEl = document.createElement("h5");
   uvIndexEl.innerText = uvi;
   apiContainerEl.appendChild(uvIndexEl);
 };
 
+// Display history buttons
+var displayHistoryButtons = function () {
+  console.log("displayHistoryButtons Called!");
+  for (let i = 0; i < searchHistory.length; i++) {
+    var buttonName = searchHistory[i];
+    var buttonEl = document.createElement("h3");
+    // buttonEl.classList = "search-btn";
+    // buttonEl.setAttribute("href", './index.html?city='+ CITY);
+    // buttonEl.setAttribute("target",);
+    // buttonEl.setAttribute("type", type);
+    buttonEl.innerText = buttonName;
+    historyButtonsEl.appendChild(buttonEl);
+    console.log("just passed append!");
+  }
+};
+
 // Event listeners
 searchFormEl.addEventListener("submit", formSubmitHandler);
+
+// Load history
+var loadHistory = function() {
+  console.log("Tasks loaded!");
+  localStorage.getItem("history");
+};
+
+// Save history
+var saveHistory = function() {
+  console.log("Tasks saved!");
+  localStorage.setItem("history");
+};
