@@ -41,9 +41,11 @@ var formSubmitHistory = function(city) {
     searchHistory.pop();
     searchHistory.unshift(city);
     displayHistoryButtons();
+    saveHistory();
   } else {
     searchHistory.unshift(city);
     displayHistoryButtons();
+    saveHistory();
   }
 };
 
@@ -151,7 +153,7 @@ var displayHistoryButtons = function() {
 
 // Display forecast
 var displayForecast = function(data) {
-  //forecastCardsEl.textContent = "";
+  forecastCardsEl.textContent = "";
   console.log(cardsArray);
   for (let i = 0; i < cardsArray.length; i++) {
     var cardEl = document.createElement("div");
@@ -186,11 +188,25 @@ historyButtonsEl.addEventListener("click", historySubmitHandler);
 // Save history
 var saveHistory = function() {
   console.log("History saved!");
-  localStorage.setItem("history");
+  localStorage.setItem("searchlog", JSON.stringify(searchHistory));
 };
 
 // Load history
 var loadHistory = function() {
   console.log("History loaded!");
-  localStorage.getItem("history");
-};
+  var retrieveData = localStorage.getItem("searchlog");
+  var storageHistory = JSON.parse(retrieveData) || [];
+  console.log('retrieved data:' + storageHistory);
+  console.log(storageHistory[0]);
+  
+  for (let i = 0; i < storageHistory.length; i++) {
+    var city = storageHistory[i];
+    if (city) {
+      searchHistory.push(city);
+    } else {
+      console.log("Nothing executed from storage");
+    } 
+  };
+  displayHistoryButtons();
+}; 
+loadHistory();
