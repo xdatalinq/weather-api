@@ -3,6 +3,8 @@ var searchFormEl = document.querySelector("#search-form");
 var apiContainerEl = document.querySelector("#main-weather");
 var cityInputEl = document.querySelector('#city');
 var historyButtonsEl = document.querySelector('#city-buttons');
+var forecastCardsEl = document.querySelector('#weather-card-container');
+var cardsArray = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]
 var searchHistory = [];
 
 // Submit form handler
@@ -32,7 +34,7 @@ var historySubmitHandler = function(event) {
   }
 };
 
-// Submit form history, push/shift to array
+// Submit form history, pop/unshift to array
 var formSubmitHistory = function(city) {
   arrayLength = searchHistory.length
   if (arrayLength >= 8) {
@@ -82,6 +84,25 @@ var fetchUVindex = function(lat, lon) {
     });   
 };
 
+// Fetch 5-day forecast
+var fetchForecast = function(lat, lon) {
+  var apiURL = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&appid=7c31afcd6af2016f309312b62ff32ba8&lat=';
+  fetch(apiURL)
+    .then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          
+          displayForecast(data);
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("Unable to connect to OpenWeather 5-day Forecast");
+    });   
+};
+
 // Dislay weather, api-container
 var displayWeather = function(data) {
   var lat = data.coord.lat;
@@ -92,7 +113,7 @@ var displayWeather = function(data) {
   var tempEl = document.createElement("h5");
   var windEl = document.createElement("h5");
   var humidityEl = document.createElement("h5");
-  currentDateEl.innerText = moment().format("dddd, MMMM Do");
+  currentDateEl.innerText = moment().format("MM/DD/YYYY");
   cityNameEl.innerText = data.name;
   tempEl.innerText = data.main.temp;
   windEl.innerText = data.wind.speed;
@@ -105,6 +126,7 @@ var displayWeather = function(data) {
   apiContainerEl.appendChild(windEl);
   apiContainerEl.appendChild(humidityEl);
   fetchUVindex(lat, lon);
+  fetchForecast(lat, lon);
 };
 
 // Display UV index, api-container
@@ -115,15 +137,29 @@ var displayUVindex = function(uvi) {
 };
 
 // Display history buttons
-var displayHistoryButtons = function () {
+var displayHistoryButtons = function() {
   historyButtonsEl.textContent = "";
   for (let i = 0; i < searchHistory.length; i++) {
     var buttonEl = document.createElement("button");
     buttonEl.classList = "search-btn";
-    buttonEl.setAttribute("name", searchHistory[i]);
     buttonEl.setAttribute("type", "submit");
+    buttonEl.setAttribute("name", searchHistory[i]);
     buttonEl.textContent = searchHistory[i];
     historyButtonsEl.appendChild(buttonEl);
+  }
+};
+
+// Display forecast
+var displayForecast = function(data) {
+  //forecastCardsEl.textContent = "";
+  console.log(cardsArray);
+  for (let i = 0; i < cardsArray.length; i++) {
+    var cardEl = document.createElement("div");
+    cardEl.classList = "card";
+    // buttonEl.setAttribute("type", "submit");
+    // buttonEl.setAttribute("name", searchHistory[i]);
+    // buttonEl.textContent = searchHistory[i];
+    forecastCardsEl.appendChild(cardEl);
   }
 };
 
@@ -131,14 +167,14 @@ var displayHistoryButtons = function () {
 searchFormEl.addEventListener("submit", formSubmitHandler);
 historyButtonsEl.addEventListener("click", historySubmitHandler);
 
-// Load history
-var loadHistory = function() {
-  console.log("History loaded!");
-  localStorage.getItem("history");
-};
-
 // Save history
 var saveHistory = function() {
   console.log("History saved!");
   localStorage.setItem("history");
+};
+
+// Load history
+var loadHistory = function() {
+  console.log("History loaded!");
+  localStorage.getItem("history");
 };
