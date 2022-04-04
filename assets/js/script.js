@@ -156,11 +156,27 @@ var displayForecast = function(data) {
   for (let i = 0; i < cardsArray.length; i++) {
     var cardEl = document.createElement("div");
     cardEl.classList = "card";
-    // buttonEl.setAttribute("type", "submit");
-    // buttonEl.setAttribute("name", searchHistory[i]);
-    // buttonEl.textContent = searchHistory[i];
-    forecastCardsEl.appendChild(cardEl);
-  }
+    var createCard = function(data) {
+      console.log(data);
+      var dateEl = document.createElement("h5");
+      var thumbnailEl = document.createElement("img");
+      var tempEl = document.createElement("h5");
+      var windEl = document.createElement("h5");
+      var humidityEl = document.createElement("h5");
+      dateEl.InnerText = moment().add(([i] + 1), "d").format("MM/DD/YYYY");
+      //thumbnailEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ list.weather[i].icon +'.png');
+      // tempEl.InnerText = list.main.temp;
+      // windEl.InnerText = list.wind.speed;
+      // humidityEl.innerText = list.main.humidity;
+      cardEl.appendChild(dateEl);
+      cardEl.appendChild(thumbnailEl);
+      cardEl.appendChild(tempEl);
+      cardEl.appendChild(windEl);
+      cardEl.appendChild(humidityEl);
+    };
+    createCard(data);
+  };
+  forecastCardsEl.appendChild(cardEl);
 };
 
 // Event listeners
