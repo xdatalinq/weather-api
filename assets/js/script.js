@@ -176,8 +176,8 @@ var displayForecast = function(data) {
       cardEl.appendChild(humidityEl);
     };
     createCard(data);
+    forecastCardsEl.appendChild(cardEl);
   };
-  forecastCardsEl.appendChild(cardEl);
 };
 
 // Event listeners
