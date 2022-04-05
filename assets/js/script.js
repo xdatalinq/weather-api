@@ -93,7 +93,6 @@ var fetchForecast = function(lat, lon) {
     .then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          
           displayForecast(data);
         });
       } else {
@@ -196,15 +195,12 @@ var loadHistory = function() {
   console.log("History loaded!");
   var retrieveData = localStorage.getItem("searchlog");
   var storageHistory = JSON.parse(retrieveData) || [];
-  console.log('retrieved data:' + storageHistory);
-  console.log(storageHistory[0]);
-  
   for (let i = 0; i < storageHistory.length; i++) {
     var city = storageHistory[i];
     if (city) {
       searchHistory.push(city);
     } else {
-      console.log("Nothing executed from storage");
+      console.log("Nothing loaded from storage");
     } 
   };
   displayHistoryButtons();
