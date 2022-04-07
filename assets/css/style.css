@@ -12,6 +12,7 @@ body {
     margin-left: 5px;
     height: 100%;
     width: 100%;
+    opacity: 49%;
 }
 .btn {
     display: block;
@@ -97,8 +98,7 @@ header {
     margin-top: 4px;
     margin-left: 12px;
     background-image: url("../img/background_XP.jpg");
-
-    
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.616);
 }
 
 .weather-card-container {
