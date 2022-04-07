@@ -114,11 +114,11 @@ var displayWeather = function(data) {
   var tempEl = document.createElement("h5");
   var windEl = document.createElement("h5");
   var humidityEl = document.createElement("h5");
-  currentDateEl.innerText = moment().format("MM/DD/YYYY");
+  currentDateEl.innerText = '('+ moment().format("MM/DD/YYYY") +')';
   cityNameEl.innerText = data.name;
-  tempEl.innerText = data.main.temp;
-  windEl.innerText = data.wind.speed;
-  humidityEl.innerText = data.main.humidity;
+  tempEl.innerText = 'Temp: ' + data.main.temp;
+  windEl.innerText = 'Wind: ' + data.wind.speed;
+  humidityEl.innerText = 'Humidity: ' + data.main.humidity;
   iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.weather[0].icon +'.png');
   apiContainerEl.appendChild(cityNameEl);
   apiContainerEl.appendChild(currentDateEl);
@@ -133,7 +133,7 @@ var displayWeather = function(data) {
 // Display UV index, api-container
 var displayUVindex = function(uvi) {
   var uvIndexEl = document.createElement("h5");
-  uvIndexEl.innerText = uvi;
+  uvIndexEl.innerText = 'UV index: ' + uvi;
   apiContainerEl.appendChild(uvIndexEl);
 };
 
@@ -165,7 +165,8 @@ var displayForecast = function(data) {
       var windEl = document.createElement("h5");
       var humidityEl = document.createElement("h5");
       dateEl.InnerText = moment().add(([i] + 1), "d").format("MM/DD/YYYY");
-      //thumbnailEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ list.weather[i].icon +'.png');
+      thumbnailEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.list[i].weather[0].icon +'.png');
+      //console.log(data.list[i].weather[0].icon);
       // tempEl.InnerText = list.main.temp;
       // windEl.InnerText = list.wind.speed;
       // humidityEl.innerText = list.main.humidity;

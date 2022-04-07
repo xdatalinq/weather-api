@@ -18,6 +18,9 @@
 .api-container {
     height: 300px;
     border-top: none;
+    background-image: url("../img/background_XP.jpg");
+    background-size: cover;
+    justify-content: space-between;
 }
 
 .app-title {
@@ -74,11 +77,17 @@ header {
 }
 
 .card {
-    width: 18%;
-    height: 20%;
+    width: 12%;
+    height: 14em;
     display: inline-flex;
     background-color: rgba(44, 44, 165, 0.705);
     border-radius: 10;
+    border: 0;
+    margin-right: 15px;
+    margin-top: 4px;
+    margin-left: 12px;
+    background-image: url("../img/background_XP.jpg");
+    
 }
 
 .weather-card-container {
@@ -86,7 +95,9 @@ header {
 }
 
 .weather-container h5 {
-    font-weight: bold;
+    font-weight: bolder;
+    font-size: x-large;
+    margin-top: 12px;
 }
 
 h1 {
@@ -99,4 +110,24 @@ h1 {
 
 .card-header {
     padding: 0;
+}
+
+#main-weather h3 {
+    display: inline-flex;
+    margin-left: 8px;
+    margin-top: 8px;
+    font-weight: bolder;
+}
+
+#main-weather img {
+    margin-left: 2px;
+    height: 80px;
+    width: 80px;
+    position:
+}
+
+#main-weather h5 {
+    margin-left: 8px;
+    margin-bottom: 24px;
+    
 }
