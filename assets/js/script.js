@@ -51,7 +51,7 @@ var formSubmitHistory = function(city) {
 
 // Fetch weather
 var getWeather = function(city) {
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q='+ city +'&appid=7c31afcd6af2016f309312b62ff32ba8';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q='+ city +'&appid=7c31afcd6af2016f309312b62ff32ba8&units=metric';
   fetch(apiUrl)
     .then(function(response) {
       if (response.ok) {
@@ -69,7 +69,7 @@ var getWeather = function(city) {
 
 // Fetch UV index
 var fetchUVindex = function(lat, lon) {
-  var apiURL = 'https://api.openweathermap.org/data/2.5/uvi?appid=7c31afcd6af2016f309312b62ff32ba8&lat='+ lat +'&lon='+ lon;
+  var apiURL = 'https://api.openweathermap.org/data/2.5/uvi?appid=7c31afcd6af2016f309312b62ff32ba8&units=metric&lat='+ lat +'&lon='+ lon;
   fetch(apiURL)
     .then(function(response) {
       if (response.ok) {
@@ -88,7 +88,7 @@ var fetchUVindex = function(lat, lon) {
 
 // Fetch 5-day forecast
 var fetchForecast = function(lat, lon) {
-  var apiURL = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ lat +'&lon='+ lon +'&appid=7c31afcd6af2016f309312b62ff32ba8&lat=';
+  var apiURL = 'https://api.openweathermap.org/data/2.5/forecast?&units=metric&lat='+ lat +'&lon='+ lon +'&appid=7c31afcd6af2016f309312b62ff32ba8';
   fetch(apiURL)
     .then(function(response) {
       if (response.ok) {
@@ -116,10 +116,11 @@ var displayWeather = function(data) {
   var humidityEl = document.createElement("h5");
   currentDateEl.innerText = '('+ moment().format("MM/DD/YYYY") +')';
   cityNameEl.innerText = data.name;
-  tempEl.innerText = 'Temp: ' + data.main.temp;
+  tempEl.innerText = 'Temp: ' + data.main.temp + '°C';
   windEl.innerText = 'Wind: ' + data.wind.speed;
   humidityEl.innerText = 'Humidity: ' + data.main.humidity;
   iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.weather[0].icon +'.png');
+  iconEl.className = "icon-main";
   apiContainerEl.appendChild(cityNameEl);
   apiContainerEl.appendChild(currentDateEl);
   apiContainerEl.appendChild(iconEl);
@@ -157,19 +158,19 @@ var displayForecast = function(data) {
     var dateIndex = function(i) {
       switch (i) {
         case 0:
-          dateIndex = 4
+          dateIndex = 6
           break;
         case 1:
-          dateIndex = 12
+          dateIndex = 14
           break;
         case 2:
-          dateIndex = 20
+          dateIndex = 22
           break;
         case 3:
-          dateIndex = 28
+          dateIndex = 30
           break;
         case 4:
-          dateIndex = 36
+          dateIndex = 38
           break;  
         default:
           console.log("Default triggered in switch statement: displayForecast()");
@@ -187,10 +188,12 @@ var displayForecast = function(data) {
       var windEl = document.createElement("h5");
       var humidityEl = document.createElement("h5");
       dateEl.textContent = data.list[dateIndex].dt_txt.split(" ")[0];
+      dateEl.className = "card-date";
       thumbnailEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.list[i].weather[0].icon +'.png');
-      tempEl.textContent = data.list[dateIndex].main.temp;
-      windEl.textContent = data.list[dateIndex].wind.speed;
-      humidityEl.textContent = data.list[dateIndex].main.humidity;
+      thumbnailEl.className = "icon-card";
+      tempEl.textContent = 'Temp: ' + data.list[dateIndex].main.temp + '°C';
+      windEl.textContent = 'Wind: ' + data.list[dateIndex].wind.speed;
+      humidityEl.textContent = 'Humidity: ' + data.list[dateIndex].main.humidity;
       cardEl.appendChild(dateEl);
       cardEl.appendChild(thumbnailEl);
       cardEl.appendChild(tempEl);
