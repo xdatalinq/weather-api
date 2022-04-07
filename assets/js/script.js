@@ -153,8 +153,30 @@ var displayHistoryButtons = function() {
 // Display forecast
 var displayForecast = function(data) {
   forecastCardsEl.textContent = "";
-  console.log(cardsArray);
   for (let i = 0; i < cardsArray.length; i++) {
+    var dateIndex = function(i) {
+      switch (i) {
+        case 0:
+          dateIndex = 4
+          break;
+        case 1:
+          dateIndex = 12
+          break;
+        case 2:
+          dateIndex = 20
+          break;
+        case 3:
+          dateIndex = 28
+          break;
+        case 4:
+          dateIndex = 36
+          break;  
+        default:
+          console.log("Default triggered in switch statement: displayForecast()");
+          break;
+      }
+    };
+    dateIndex(i);
     var cardEl = document.createElement("div");
     cardEl.classList = "card";
     var createCard = function(data) {
@@ -164,12 +186,11 @@ var displayForecast = function(data) {
       var tempEl = document.createElement("h5");
       var windEl = document.createElement("h5");
       var humidityEl = document.createElement("h5");
-      dateEl.InnerText = moment().add(([i] + 1), "d").format("MM/DD/YYYY");
+      dateEl.textContent = data.list[dateIndex].dt_txt.split(" ")[0];
       thumbnailEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.list[i].weather[0].icon +'.png');
-      //console.log(data.list[i].weather[0].icon);
-      // tempEl.InnerText = list.main.temp;
-      // windEl.InnerText = list.wind.speed;
-      // humidityEl.innerText = list.main.humidity;
+      tempEl.textContent = data.list[dateIndex].main.temp;
+      windEl.textContent = data.list[dateIndex].wind.speed;
+      humidityEl.textContent = data.list[dateIndex].main.humidity;
       cardEl.appendChild(dateEl);
       cardEl.appendChild(thumbnailEl);
       cardEl.appendChild(tempEl);
