@@ -1,12 +1,18 @@
-/* body {
+body {
     background-image: url("../img/background_XP.jpg");
-  } */
+  }
   
 .borderframe {
     border: 1px solid black;
     padding: 0;
 }
 
+#main-logo {
+    margin-top: 5px;
+    margin-left: 5px;
+    height: 100%;
+    width: 100%;
+}
 .btn {
     display: block;
 }
