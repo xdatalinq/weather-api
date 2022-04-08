@@ -117,8 +117,8 @@ var displayWeather = function(data) {
   currentDateEl.innerText = '('+ moment().format("MM/DD/YYYY") +')';
   cityNameEl.innerText = data.name;
   tempEl.innerText = 'Temp: ' + data.main.temp + '°C';
-  windEl.innerText = 'Wind: ' + data.wind.speed;
-  humidityEl.innerText = 'Humidity: ' + data.main.humidity;
+  windEl.innerText = 'Wind: ' + data.wind.speed + 'km/h';
+  humidityEl.innerText = 'Humidity: ' + data.main.humidity + '%';
   iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.weather[0].icon +'.png');
   iconEl.className = "icon-main";
   apiContainerEl.appendChild(cityNameEl);
@@ -192,8 +192,8 @@ var displayForecast = function(data) {
       thumbnailEl.setAttribute('src', 'http://openweathermap.org/img/wn/'+ data.list[i].weather[0].icon +'.png');
       thumbnailEl.className = "icon-card";
       tempEl.textContent = 'Temp: ' + data.list[dateIndex].main.temp + '°C';
-      windEl.textContent = 'Wind: ' + data.list[dateIndex].wind.speed;
-      humidityEl.textContent = 'Humidity: ' + data.list[dateIndex].main.humidity;
+      windEl.textContent = 'Wind: ' + data.list[dateIndex].wind.speed + 'km/h';
+      humidityEl.textContent = 'Humidity: ' + data.list[dateIndex].main.humidity+ '%';
       cardEl.appendChild(dateEl);
       cardEl.appendChild(thumbnailEl);
       cardEl.appendChild(tempEl);
