@@ -104,7 +104,7 @@ var fetchForecast = function(lat, lon) {
     });   
 };
 
-// Dislay weather, api-container
+// Display weather, api-container
 var displayWeather = function(data) {
   var lat = data.coord.lat;
   var lon = data.coord.lon;
