@@ -88,8 +88,8 @@ header {
 
 .card {
     width: 12%;
-    min-width: 177px;
-    height: 14em;
+    min-width: 232px;
+    height: 18em;
     display: inline-flex;
     background-color: rgba(44, 44, 165, 0.705);
     border-radius: 10;
