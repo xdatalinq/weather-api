@@ -12,6 +12,8 @@ var formSubmitHandler = function(event) {
   event.preventDefault();
   var city = cityInputEl.value.trim();
   if (city) {
+    // Capitalize the first letter of the city name
+    city = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
     getWeather(city);
     formSubmitHistory(city);
     apiContainerEl.textContent = "";
