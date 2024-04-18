@@ -39,7 +39,11 @@ var historySubmitHandler = function(event) {
 // Submit form history, pop/unshift to array
 var formSubmitHistory = function(city) {
   arrayLength = searchHistory.length
-  if (arrayLength >= 8) {
+  if (searchHistory.includes(city)) {
+    displayHistoryButtons();
+    saveHistory();
+  }
+  else if (arrayLength >= 8) {
     searchHistory.pop();
     searchHistory.unshift(city);
     displayHistoryButtons();
